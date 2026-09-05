@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>voidstore</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #11011a;
+        font-family: Arial, sans-serif;
+      }
+
+      .login {
+        background: #d5b5e5;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+      }
+
+      .login p {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      form label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+      }
+
+      form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+      }
+
+      form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #bd00ff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login">
+      <p>LOGIN</p>
+      <form id="authForm">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+  
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="A senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra e um número" required>
+  
+  <div style="display: flex; gap: 10px; margin-top: 10px;">
+    <button type="button" id="btnCadastrar">Cadastrar</button>
+    <button type="button" id="btnLogin">Login</button>
+  </div>
+</form>
+
+    </div>
+    <script>
+const nomeInput = document.getElementById('nome');
+const senhaInput = document.getElementById('senha');
+const form = document.getElementById('authForm');
+
+// Função auxiliar para obter os usuários do localStorage
+function getUsuarios() {
+  return JSON.parse(localStorage.getItem('usuarios')) || {};
+}
+
+// Lógica de Cadastro
+document.getElementById('btnCadastrar').addEventListener('click', function() {
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  const nome = nomeInput.value.trim();
+  const senha = senhaInput.value;
+  const usuarios = getUsuarios();
+
+  if (usuarios[nome]) {
+    alert('Este nome já está cadastrado. Tente outro ou faça login.');
+    return;
+  }
+
+  usuarios[nome] = senha;
+  localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  alert('Cadastro realizado com sucesso! Agora você pode fazer login.');
+});
+
+// Lógica de Login
+document.getElementById('btnLogin').addEventListener('click', function() {
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  const nome = nomeInput.value.trim();
+  const senha = senhaInput.value;
+  const usuarios = getUsuarios();
+
+  if (usuarios[nome] && usuarios[nome] === senha) {
+    window.location.href = 'main.html';
+  } else {
+    alert('Usuário não encontrado ou senha incorreta.');
+  }
+});
+  </script>
+  </body>
+</html>
