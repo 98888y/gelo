@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoidStore - MainStore</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0;
+      background-color: #49084f;
+      font-family: Arial, sans-serif;
+      padding: 15px;
+      padding-top: 30px;
+    }
+
+    .btn-menu {
+      position: fixed;
+      top: 15px; left: 15px;
+      z-index: 1001;
+      font-size: 26px;
+      background: #fad5ff;
+      border: 2px solid #c915f2;
+      border-radius: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #c915f2;
+      line-height: 1;
+    }
+
+    .panel-left {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 250px;
+      background-color: #fad5ff;
+      display: flex;
+      flex-direction: column;
+      padding: 70px 20px 20px 20px;
+      gap: 10px;
+      transform: translateX(-100%); /* ESCONDIDO PRA ESQUERDA */
+      transition: transform 0.3s ease;
+      z-index: 1000;
+     }
+
+    .overlay.on { opacity: 1; pointer-events: all; }
+    
+     .grid-product {
+      display: flex;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      width: 99%;
+      margin-top: 20px;
+      border: 2px solid #f2c7ff;
+      border-radius: 15px;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 10px;
+    }
+
+    .card-produto {
+      overflow-x: auto;
+    }
+
+    .main-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;     /*Centraliza o conteúdo na horizontal */
+      justify-content: flex-start; /*Alignment no topo (padrão) */
+      text-align: center;  /*Centraliza o texto de várias linhas */
+      width: 99%;
+      max-width: 1200px;
+      height: 90vh;
+      min-height: 74vh;
+      right: 40px;
+      padding: 30px 20px;
+      background-color:#7912ecab;
+      border: 2px solid #c915f2;
+      border-radius: 14px;
+      box-shadow: 0 0 15px #df58e9, 0 0 30px #c528e8;
+      align-self: start;
+    }
+
+    
+    
+    @media (max-width: 600px) {
+      body { padding: 10px; padding-top: 70px; }
+      .main-screen { padding: 20px 12px; }
+      .grid-product { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+
+    @media (min-width: 1200px) {
+      .main-screen { padding: 80px 10px;}
+      .grid-product { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+    
+</head>
+<body>
+  
+  <div class="main-screen">
+    <h1 style="color: #0fc421; font-family: Verdana, Geneva, Tahoma;">Bem-Vindo ao VoidStore</h1>
+    <p style="color: #1ef215ab">divirta-se comprando coisas nessa loja</p>
+
+    <div id="grid-product" class="grid-product">
+      
+    </div>
+  </div>
+
+  <button class="btn-menu" id="btnMenu">☰</button>
+  
+  <div class="panel-left">
+  <!-- Perfil / Conta -->
+  <a href="#" class="panel-item account">
+    <img src="[https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.jpg]" alt="Ícone">
+    <span>Conta</span>
+  </a>
+
+  <!-- Menu de Navegação -->
+  <nav class="panel-menu">
+    <a href="#" class="panel-item">Mods de Jogos</a>
+    <a href="#" class="panel-item">Cursos</a>
+    <a href="#" class="panel-item">APKs Modificados</a>
+    <a href="#" class="panel-item">Scripts JS</a>
+    <a href="#" class="panel-item">Scripts PY</a>
+    <a href="#" class="panel-item">Mecânica Caseira</a>
+  </nav>
+
+  <!-- Botão Sair -->
+  <a href="#" class="panel-item-logout">Sair</a>
+</div>
+<!-- Imagem pública para teste de carregamento -->
+<script src="products.js"></script>
+</body>
+</html>
